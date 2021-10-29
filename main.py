@@ -117,15 +117,17 @@ class StaticWebsiteStack(TerraformStack):
                 evaluate_target_health=False
             )]
         )
-
-        # TerraformOutput(self, "newInstanceIP", value=newInstance.public_ip)
+        
+        # Output values to console after deployment
         TerraformOutput(self, "out_s3_bucket_website_url", value=website_bucket.bucket_regional_domain_name)
         TerraformOutput(self, "out_cloudfront_distribution_domain_name", value=cloudfront_distribution.domain_name)
 
 
+# Define stack, pass in the root domain Route53 hosted zone ID
 app = App()
 stack = StaticWebsiteStack(app, "cdktf_static_website", hosted_zone_id="ROUTE53_HOSTED_ZONE_ID_HERE")
 
+# Adjust this based on your cdktf project setup method (local or Terraform Cloud)
 RemoteBackend(
     stack,
     hostname="app.terraform.io",
@@ -133,4 +135,5 @@ RemoteBackend(
     workspaces=NamedRemoteWorkspace("TERRAFORM_CLOUD_WORKSPACE_NAME_HERE"),
 )
 
+# Deploy stack
 app.synth()
