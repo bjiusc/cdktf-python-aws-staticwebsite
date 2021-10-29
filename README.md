@@ -29,6 +29,6 @@ In general, ensure cdktf is installed with dependencies by following the guide a
 
 4: ensure you have local AWS credentials setup (alongside the AWS CLI v2 package) by running `aws configure`
 
-5: Copy and paste the code contained in `main_cleansed.py` into your `main.py`
+5: Copy and paste the code contained in `main.py` into your `main.py` for the new cdktf Python project. Adjust the `RemoteBackend` to match the parameters of your project if you are using Terraform Cloud, otherwise remove that code block if using cdktf locally.
 
 6: Test that the code is valid by running `cdktf synth` - if successful, deploy the code using `cdktf deploy`
